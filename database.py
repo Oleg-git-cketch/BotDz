@@ -6,12 +6,18 @@ sql = connection.cursor()
 
 sql.execute('CREATE TABLE IF NOT EXISTS users (tg_id INTEGER PRIMARY KEY, name TEXT, number TEXT);')
 sql.execute('CREATE TABLE IF NOT EXISTS location (latitude REAL, longitude REAL);')
+sql.execute('CREATE TABLE IF NOT EXISTS language (lang);')
 
 def register(tg_id, name, number):
     sql.execute('INSERT INTO users (tg_id, name, number) VALUES (?, ?, ?);', (tg_id, name, number))
     connection.commit()
+
 def location(latitude, longitude):
     sql.execute('INSERT INTO location VALUES (?, ?);', (latitude, longitude))
+    connection.commit()
+
+def chan_language(lang):
+    sql.execute('INSERT INTO users VALUES (?,);', (lang,))
     connection.commit()
 
 def check_user(tg_id):
